@@ -34,6 +34,9 @@ build_test() {
   local test=$1
 
   echo "- label: ':docker: Build ${test}'"
+  echo "  env:"
+  echo "  - DOCKER_BUILDKIT: 1"
+  echo "  - COMPOSE_DOCKER_CLI_BUILD: 1"
   echo "  plugins:"
   echo "  - docker-compose#v3.5.0:"
   echo "      build: ${test}"
