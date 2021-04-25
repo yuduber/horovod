@@ -39,7 +39,8 @@ def _driver_fn(node_actors, all_host_names, local_host_names, settings):
     """
     # Launch a TCP server called driver service on the host running horovod
     num_hosts = len(all_host_names)
-    driver = HorovodRunDriverService(num_hosts, settings.key, settings.nics)
+    # driver = HorovodRunDriverService(num_hosts, settings.key, settings.nics)
+    driver = HorovodRunDriverService(len(node_actors), settings.key, settings.nics)
     if settings.verbose >= 2:
         print('Launched horovod server.')
     # Have all the workers register themselves with the service service.
