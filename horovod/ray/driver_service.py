@@ -43,13 +43,16 @@ def _driver_fn(node_actors, all_host_names, local_host_names, settings):
     if settings.verbose >= 2:
         print('Launched horovod server.')
     # Have all the workers register themselves with the service service.
-    if len(node_actors) != num_hosts:
-        raise ValueError(f"Number of node actors ({len(node_actors)}) "
-                         f"must match num_hosts ({num_hosts}).")
+    # if len(node_actors) != num_hosts:
+    #     raise ValueError(f"Number of node actors ({len(node_actors)}) "
+    #                      f"must match num_hosts ({num_hosts}).")
+    print (f"Number of node actors ({len(node_actors)}) "
+                         f"vs num_hosts ({num_hosts}).")
 
     _actor_launch_task_servers(
         node_actors=node_actors,
-        num_hosts=len(all_host_names),
+        # num_hosts=len(all_host_names),
+        num_hosts=len(node_actors),
         driver_addresses=driver.addresses(),
         settings=settings)
 
@@ -59,3 +62,4 @@ def _driver_fn(node_actors, all_host_names, local_host_names, settings):
         return _run_probe(driver, settings, num_hosts)
     finally:
         driver.shutdown()
+
