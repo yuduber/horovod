@@ -308,7 +308,14 @@ class RayExecutor:
                 ray.get(futures)
             node_workers.append(curr_node_workers[0])
 
-        return self.workers, node_workers
+        # In some setups (i.e., Peloton), ray nodes may not have
+        # unique host names.
+        host_worker_map = {}
+        hostnames = ray.get([w.hostname.remote() for w in node_workers])
+        for hostname, worker in zip(hostnames, node_workers):
+            host_worker_map[hostname] = worker
+
+        return self.workers, list(host_worker_map.values())
 
     def _start_executables(self, executable_cls, executable_args,
                            executable_kwargs):
