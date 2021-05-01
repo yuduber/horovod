@@ -496,6 +496,7 @@ class _ExecutorDriver:
                    kwargs: Optional[Dict] = None) -> List[Any]:
         """Executes the provided function on all workers.
 
+
         Args:
             fn: Target function that can be executed with arbitrary
                 args and keyword arguments.
