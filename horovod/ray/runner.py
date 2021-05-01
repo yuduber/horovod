@@ -41,6 +41,7 @@ class MiniSettings:
 class Coordinator:
     """Responsible for instantiating the Rendezvous server.
 
+
     Args:
         settings: Horovod Settings object."""
     rendezvous = None
